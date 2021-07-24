@@ -35,30 +35,46 @@ function Semana(props) {
     )
 }
 
-function Dia(props) {
-    return (
-        <button>{
+class Dia extends React.Component {
+    state = { foiClicado: '0' };
 
-            (props.dia > 0 && props.dia < 32) ?
-                props.dia :
-                '.'
+    constructor() {
+        super();
+        this.handlenOnClick = this.handlenOnClick.bind(this);
 
+    }
+    handlenOnClick(event) {
+        console.log("Dia " + this.props.dia + " Foi clicado: " + this.state.foiClicado + " vezes.");
+        if (this.state.foiClicado === '0') {
+            this.setState({ foiClicado: '1' });
         }
-        </button>
-    )
+    }
+
+    render() {
+        return (
+            <button className="dia" onClick={this.handlenOnClick}>{
+
+                (this.props.dia > 0 && this.props.dia < 32) ?
+                    this.props.dia :
+                    '.'
+
+            }
+            </button>
+        );
+    }
 }
 
 function Calendario(props) {
     return (
         <div>
             <div>{props.mes} / {props.ano}</div>
-            <button>D</button>
-            <button>S</button>
-            <button>T</button>
-            <button>Q</button>
-            <button>Q</button>
-            <button>S</button>
-            <button>S</button>
+            <button className="dia">D</button>
+            <button className="dia">S</button>
+            <button className="dia">T</button>
+            <button className="dia">Q</button>
+            <button className="dia">Q</button>
+            <button className="dia">S</button>
+            <button className="dia">S</button>
             <Semana diaInical={-3} />
             <Semana diaInical={4} />
             <Semana diaInical={11} />
